@@ -1,4 +1,4 @@
-This is a test exercise to get hired.
+# Test exercise to get hired.
 
 Consider the following recursively defined function
 
