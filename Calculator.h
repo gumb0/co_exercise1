@@ -13,5 +13,6 @@ public:
 
 std::unique_ptr<Calculator> CreateBruteForceCalculator();
 std::unique_ptr<Calculator> CreateOptimiziedCalculator();
+std::unique_ptr<Calculator> CreateIterativeCalculator();
 
 #endif

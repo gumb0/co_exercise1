@@ -1,6 +1,7 @@
 #include "Calculator.h"
 
 #include <unordered_map>
+#include <vector>
 
 class BruteForceCalculator : public Calculator
 {
@@ -56,4 +57,35 @@ private:
 std::unique_ptr<Calculator> CreateOptimiziedCalculator()
 {
     return std::unique_ptr<Calculator>(new OptimizedCalculator);
+}
+
+class IterativeCalculator : public Calculator
+{
+public:
+    virtual long long f(long long n)
+    {
+        mValues.resize(n + 1);
+        mValues[0] = 1;
+        mValues[1] = 1;
+
+        for (long long i = 1; i <= n; ++i)
+        {
+            if (2 * i <= n)
+                mValues[2 * i] = mValues[i];
+            if (2 * i + 1 <= n)
+                mValues[2 * i  + 1] = mValues[i] + mValues[i - 1];
+
+            if (2 * i == n || 2 * i + 1 == n)
+                return mValues[n];
+        }
+        return mValues[n];
+    }
+
+private:
+    std::vector<long long> mValues;
+};
+
+std::unique_ptr<Calculator> CreateIterativeCalculator()
+{
+    return std::unique_ptr<Calculator>(new IterativeCalculator);
 }
